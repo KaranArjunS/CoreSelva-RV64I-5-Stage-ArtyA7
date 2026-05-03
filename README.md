@@ -327,8 +327,11 @@ ffd08093   addi  x1, x1, -3
 fe1ff06f   jal   x0, -32         # loop back
 ```
 **Result:**
+
 <img width="3244" height="2720" alt="IMG_20260504_012458" src="https://github.com/user-attachments/assets/9b68348d-5ac2-4434-85c4-b8d2a1bad9d4" />
+
 <img width="3192" height="2824" alt="IMG_20260504_012526" src="https://github.com/user-attachments/assets/32b9c7c2-3502-4237-bfc9-e224e71a7d0f" />
+
 <img width="3096" height="2736" alt="IMG_20260504_012714" src="https://github.com/user-attachments/assets/bbdd8ad7-c7e7-4216-a185-c2874453f6a9" />
 **Result: PASSED** — digits cycle correctly on the 7-segment display.
 
