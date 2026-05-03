@@ -469,4 +469,14 @@ CoreSelva-RV64-P5/
 
 ---
 
+## License
+
+This project is licensed under the MIT License.
+
+You are free to use, modify, and distribute this project, including for commercial purposes, provided that the original copyright and license notice are included.
+
+See the [LICENSE](LICENSE) file for full details.
+
 *Built with SystemVerilog. Verified with simulation and FPGA hardware.*
+
+---
