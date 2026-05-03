@@ -48,16 +48,16 @@ Key features:
          ┌─────────────────────────────────────────────────────────────┐
          │                      rv64_core                              │
          │                                                             │
-  clk ──►│  ┌──────┐  ┌──────┐  ┌──────┐  ┌──────┐  ┌──────┐       │
-  rst ──►│  │  IF  │─►│  ID  │─►│  EX  │─►│ MEM  │─►│  WB  │       │──► seg[6:0]
-         │  └──────┘  └──────┘  └──────┘  └──────┘  └──────┘       │
+  clk ──►│  ┌──────┐  ┌──────┐  ┌──────┐  ┌──────┐  ┌──────┐           │
+  rst ──►│  │  IF  │─►│  ID  │─►│  EX  │─►│ MEM  │─►│  WB  │           │──► seg[6:0]
+         │  └──────┘  └──────┘  └──────┘  └──────┘  └──────┘           │
          │      │         │         │          │          │            │
-         │    IF/ID     ID/EX     EX/MEM    MEM/WB     wb_data        │
+         │    IF/ID     ID/EX     EX/MEM    MEM/WB     wb_data         │
          │              │                               │              │
          │           regfile ◄───────────────────────── │              │
          │                                                             │
-         │  ◄─────── forwardA / forwardB ──────────────►              │
-         │  ◄─────── stall / flush ────────────────────►              │
+         │  ◄─────── forwardA / forwardB ──────────────►               │
+         │  ◄─────── stall / flush ────────────────────►               │
          └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -326,7 +326,10 @@ ffd08093   addi  x1, x1, -3
 0011a023   sw    x1, 0(x3)
 fe1ff06f   jal   x0, -32         # loop back
 ```
-
+**Result:**
+<img width="3244" height="2720" alt="IMG_20260504_012458" src="https://github.com/user-attachments/assets/9b68348d-5ac2-4434-85c4-b8d2a1bad9d4" />
+<img width="3192" height="2824" alt="IMG_20260504_012526" src="https://github.com/user-attachments/assets/32b9c7c2-3502-4237-bfc9-e224e71a7d0f" />
+<img width="3096" height="2736" alt="IMG_20260504_012714" src="https://github.com/user-attachments/assets/bbdd8ad7-c7e7-4216-a185-c2874453f6a9" />
 **Result: PASSED** — digits cycle correctly on the 7-segment display.
 
 ---
@@ -434,21 +437,24 @@ fff00b93   addi  x23, x0, -1
 ## File Structure
 
 ```
-rv64i-pipeline/
-├── rtl/
-│   ├── rv64_core.sv       # Top-level pipeline core
-│   ├── decode.sv          # Instruction decoder + immediate gen
-│   ├── execute.sv         # ALU + branch eval + target calc
-│   ├── regfile.sv         # 32×64 register file with bypass
-│   └── seven_seg.sv       # 7-segment display decoder
-├── fpga/
-│   ├── top.sv             # FPGA wrapper with clock divider + reset sync
-│   └── constraints.xdc    # Arty A7-100T pin constraints
-├── sim/
-│   ├── rv64_tb.sv         # Pipeline monitor testbench
-│   ├── program.mem        # Test program (hex)
-│   └── program2.mem       # Extended ALU/branch test
-└── index.md               # This file
+CoreSelva-RV64-P5/
+├── program/                         # Instruction memory
+│   └── program.mem                 # Hex program loaded via $readmemh
+
+├── rtl/                            # CPU design (SystemVerilog)
+│   ├── rv64_core.sv                # 5-stage pipeline core
+│   ├── decode.sv                   # Instruction decode + immediate generation
+│   ├── execute.sv                  # ALU + branch logic + target calculation
+│   ├── regfile.sv                  # Register file
+│   └── seven_seg.sv                # 7-segment display driver
+
+├── sim/                            # Simulation
+│   └── rv64_tb.sv                  # Testbench
+
+├── Vivado Arty A7/                # Ready-to-use FPGA project
+│   └── RV64-P5 Arty A7/
+│       ├── RV64-P5 arty a7 100t.xpr      # Open this in Vivado
+│       └── RV64-P5 arty a7 100t.srcs/    # Sources + constraints
 ```
 
 ---
